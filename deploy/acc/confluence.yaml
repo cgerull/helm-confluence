@@ -1,0 +1,23 @@
+ingress:
+  enabled: true
+  className: "nginx"
+  annotations: {}
+    # kubernetes.io/ingress.class: nginx
+    # kubernetes.io/tls-acme: "true"
+  hosts:
+    - host: confluence-acc.mydomain.net
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+
+env:
+  - name: ATL_PROXY_NAME
+    value: confluence-acc.mydomain.net
+    
+persistence:
+  enabled: true
+  accessMode: ReadWriteMany
+  data:
+    claimName: confluence 
+    storageClassName: ""
+    size: "1Gi"
