@@ -1,0 +1,31 @@
+ingress:
+  enabled: true
+  className: "nginx"
+  annotations: {}
+    # kubernetes.io/ingress.class: nginx
+    # kubernetes.io/tls-acme: "true"
+  hosts:
+    - host: confluence-tst.mydomain.net
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+
+env:
+  - name: ATL_PROXY_NAME
+    value: "confluence-tst.mydomain.net"
+  - name: ATL_PROXY_PORT
+    value: "443"
+  - name: ATL_TOMCAT_SCHEME
+    value: "https"
+  - name: ATL_TOMCAT_SECURE
+    value: "true"
+  - name: JVM_SUPPORT_RECOMMENDED_ARGS
+    value: "-Dhttp.proxyHost=proxy.mydomain.net -Dhttp.proxyPort=8080 -Dhttps.proxyHost=proxy.mydomain.net -Dhttps.proxyPort=8080 -Dhttp.nonProxyHosts=localhost"
+
+persistence:
+  enabled: true
+  accessMode: ReadWriteMany
+  data:
+    claimName: confluence 
+    storageClassName: ""
+    size: "2Gi"

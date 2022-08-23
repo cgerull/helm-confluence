@@ -96,7 +96,7 @@ livenessProbe:
       - bash
       - -c
       - 'curl -sSL -X GET -G "http://localhost:8090/status" | python -c "import json,sys;obj=json.load(sys.stdin);"'
-  initialDelaySeconds: 120
+  initialDelaySeconds: 240
   periodSeconds: 60
 
 volumes:
